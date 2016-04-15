@@ -1,0 +1,65 @@
+<h2>Fill in the blank</h2>
+<div class="problem-sentence" ng-hide="done">
+    <span>{{vm.sentences[vm.currentProblem].partOne + ' '}}</span>
+    <a class='dropdown-button btn'
+       href='#'
+       ng-class="vm.answer != null && vm.answer != vm.sentences[vm.currentProblem].answer ? 'wrong-button' : ''"
+       data-activates="dropdown1">
+        <span>{{vm.answer != null ? vm.answer : 'SELECT ONE'}}</span>
+    </a>
+    <span>{{' ' + vm.sentences[vm.currentProblem].partTwo}}</span>
+    <ul id="dropdown1"
+        class="dropdown-content">
+        <li ng-repeat="word in vm.sentences[vm.currentProblem].choices">
+            <a ng-click="vm.checkAnswer(word, vm.sentences[vm.currentProblem])">{{word}}</a>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <button class="btn-large right"
+            ng-hide="vm.currentProblem == (vm.sentences.length - 1)"
+            ng-class="vm.answer == null || vm.answer != vm.sentences[vm.currentProblem].answer ? 'disabled' : ''"
+            ng-click="vm.next()"
+            ng-disabled="vm.moveOn == false">
+        NEXT
+    </button>
+    <button class="btn-large right"
+            ng-show="vm.currentProblem == (vm.sentences.length - 1)"
+            ng-class="vm.answer == null || vm.answer != vm.sentences[vm.currentProblem].answer ? 'disabled' : ''"
+            ng-click="done = true"
+            ng-disabled="vm.moveOn == false">
+        FINISH
+    </button>
+</div>
+<div ng-if="done" class="problem-sentence">
+    <div>
+        <b>Questions:</b>
+        <span>{{vm.sentences.length}}</span>
+    </div>
+    <div>
+        <b>Wrong guesses:</b>
+        <span>{{vm.failedAttempts}}</span>
+    </div>
+</div>
+<!--<a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>-->
+
+<!--&lt;!&ndash; Dropdown Structure &ndash;&gt;-->
+<!--<ul id='dropdown1' class='dropdown-content'>-->
+    <!--<li><a href="#!">one</a></li>-->
+    <!--<li><a href="#!">two</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="#!">three</a></li>-->
+<!--</ul>-->
+
+<script>
+    $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: true, // Does not change width of dropdown to that of the activator
+            hover: false, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        }
+    );
+</script>

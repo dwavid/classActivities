@@ -1,0 +1,23 @@
+<h2>Parts of speech</h2>
+<p>
+    Tap the <b>{{vm.lookingFor}}</b> in the following sentence:
+</p>
+<div class="problem-sentence">
+    <span ng-repeat="item in vm.testSentence track by $index"
+          ng-click="vm.checkAnswer(item, vm.lookingFor)"
+          class="click-text"
+          ng-class="item.answer == false ? 'red-text' : (item.answer == true ? 'teal-text' : '')">
+        {{item.word + ' '}}
+    </span>
+    <br>
+    <br>
+    <span>Goal: {{vm.correctGoal}}</span>
+    <span>Correct: {{vm.numCorrect}}</span>
+    <span>Fails: {{vm.failedAttempts}}</span>
+    <button class="btn-large right"
+            ng-class="vm.numCorrect < vm.correctGoal ? 'disabled' : ''"
+            ng-click="vm.lookingFor = 'verb'; vm.resetAnswers();"
+            ng-disabled="vm.numCorrect < vm.correctGoal">
+        NEXT
+    </button>
+</div>

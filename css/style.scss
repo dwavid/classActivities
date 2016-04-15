@@ -1,0 +1,31 @@
+h1, h2, h3, h4, h5, h6 {
+  color: #26a69a;
+}
+nav {
+  background: #26a69a;
+}
+.card.teal {
+  * {
+    color: white;
+  }
+}
+.problem-sentence {
+  font-size:2.2em;
+  ul{
+    li {
+      a{
+        font-size:1em;
+        text-align: center;
+      }
+    }
+  }
+  span.click-text {
+    :hover {
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
+.wrong-button {
+  background: darken(#faaaaa, 20%) !important;
+}
