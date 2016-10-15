@@ -7,6 +7,9 @@ nav {
 .card.teal * {
   color: white; }
 
+.base10 .card.teal {
+  border: 1px #186860 solid; }
+
 .problem-sentence {
   font-size: 2.2em; }
   .problem-sentence ul li a {

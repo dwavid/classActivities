@@ -9,6 +9,11 @@ nav {
     color: white;
   }
 }
+.base10 {
+  .card.teal {
+    border: 1px darken(#26A69A, 15) solid;
+  }
+}
 .problem-sentence {
   font-size:2.2em;
   ul{

@@ -5,6 +5,20 @@ angular.module('classActivities', [
     'ui.sortable'
 ]);
 
+angular.module('classActivities').directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 angular.module('classActivities').config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$rootScopeProvider',
     function ($stateProvider, $httpProvider, $urlRouterProvider, $rootScopeProvider) {
 
@@ -44,6 +58,19 @@ angular.module('classActivities').config(['$stateProvider', '$httpProvider', '$u
                 controller: '',
                 data: {
                     pageTitle: 'Math',
+                    helpUrl: '',
+                    showNav: false,
+                    scrollUp: true,
+                    authRequired: false
+                }
+            })
+
+            .state('base-ten', {
+                url: '/math/base-ten',
+                templateUrl: 'components/math/base-ten/base-ten.html',
+                controller: 'BaseTenCtrl as vm',
+                data: {
+                    pageTitle: 'Base Ten',
                     helpUrl: '',
                     showNav: false,
                     scrollUp: true,

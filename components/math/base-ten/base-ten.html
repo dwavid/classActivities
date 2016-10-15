@@ -1,0 +1,222 @@
+<h2>Base Ten Blocks</h2>
+
+<div class="row">
+    <div class="col s6">
+        <input ng-enter="vm.setQNumber(vm.qNumber)"
+               style="font-size: 3em;"
+               type="number"
+               min="1"
+               max="999"
+               placeholder="Enter number"
+               ng-model="vm.qNumber"/>
+    </div>
+    <div class="col s6">
+        <script>
+            $('.dropdown-button').dropdown({
+                        inDuration: 300,
+                        outDuration: 225,
+                        constrain_width: false, // Does not change width of dropdown to that of the activator
+                        hover: false, // Activate on hover
+                        gutter: 0, // Spacing from edge
+                        belowOrigin: false, // Displays dropdown below the button
+                        alignment: 'left' // Displays dropdown with edge aligned to the left of button
+                    }
+            );
+        </script>
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-button btn-large' data-activates='dropdown1'>Random</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li>
+                <a ng-click="vm.setQNumber(null, 1, 9)">
+                    Random 1 digit
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.setQNumber(null, 10, 99)">
+                    Random 2 digit
+                </a>
+            </li>
+            <li>
+                <a ng-click="vm.setQNumber(null, 100, 999)">
+                    Random 3 digit
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="vm.qNumber != null" class="col s12" style="font-size: 2em;">
+        <h4>Expanded form</h4>
+        <span ng-if="vm.hundreds">{{vm.hundreds * 100}}</span>
+        <span ng-if="vm.hundreds && vm.tens"> + </span>
+        <span ng-if="vm.tens">{{vm.tens * 10}}</span>
+        <span ng-if="(vm.tens || vm.hundreds) && vm.ones"> + </span>
+        <span ng-if="vm.ones">{{vm.ones}}</span>
+        <span ng-if="vm.qCopy != null"> = {{vm.qCopy}}</span>
+    </div>
+</div>
+
+<div ng-if="vm.qNumber != null" class="row">
+    <div class="col s12">
+        <h4>Block visualization</h4>
+    </div>
+    <div ng-if="vm.qNumber > 99" class="col s4">
+        <h5>Hundreds: {{vm.hundreds}}</h5>
+        <div class="row base10" ng-repeat="a in vm.hundredsArray track by $index">
+            <div class="row">
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+                <div class="col s1 center" style="padding: 0;">
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                    <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                </div>
+            </div>
+            <div class="row">
+                {{$index + 1}}
+            </div>
+        </div>
+    </div>
+    <div class="col s4" ng-if="vm.qNumber > 9">
+        <h5>Tens: {{vm.tens}}</h5>
+        <div class="row base10">
+            <div class="col s1 center" style="padding: 2px;" ng-repeat="b in vm.tensArray track by $index">
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                <div style="margin: 0 auto" class="card teal">&nbsp;</div>
+                {{$index + 1}}
+            </div>
+        </div>
+    </div>
+    <div class="col s4">
+        <h5>Ones: {{vm.ones}}</h5>
+        <div class="row" style="margin-bottom: 2px" ng-repeat="c in vm.onesArray track by $index">
+            <div class="col s1" style="padding-top: 5px;">
+                {{$index + 1}}
+            </div>
+            <div class="col s1 base10" style="padding: 2px;">
+                <div class="card teal" style="margin: 0 auto 1px;">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
